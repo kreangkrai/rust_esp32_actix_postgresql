@@ -1,5 +1,5 @@
 use actix_web::{middleware,App,HttpServer};
-use actix_web_test::app_config::config_app;
+use rust_esp32_actix_postgresql::app_config::config_app;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()>{
@@ -11,7 +11,7 @@ async fn main() -> std::io::Result<()>{
         .configure(config_app)
         .wrap(middleware::Logger::default())
     })
-    .bind(("172.20.10.4",8081))?
+    .bind(("127.0.0.1",8081))?
     .run()
     .await
 }

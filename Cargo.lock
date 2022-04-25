@@ -182,28 +182,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "actix_web_test"
-version = "0.1.0"
-dependencies = [
- "actix-service",
- "actix-web",
- "chrono",
- "config",
- "deadpool-postgres",
- "derive_more",
- "dotenv",
- "env_logger",
- "jsonwebtoken",
- "serde",
- "serde_json",
- "sha2",
- "tokio",
- "tokio-pg-mapper",
- "tokio-pg-mapper-derive",
- "tokio-postgres",
-]
-
-[[package]]
 name = "adler"
 version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1417,6 +1395,28 @@ checksum = "f6d5f2436026b4f6e79dc829837d467cc7e9a55ee40e750d716713540715a2df"
 dependencies = [
  "cfg-if",
  "ordered-multimap",
+]
+
+[[package]]
+name = "rust_esp32_actix_postgresql"
+version = "0.1.0"
+dependencies = [
+ "actix-service",
+ "actix-web",
+ "chrono",
+ "config",
+ "deadpool-postgres",
+ "derive_more",
+ "dotenv",
+ "env_logger",
+ "jsonwebtoken",
+ "serde",
+ "serde_json",
+ "sha2",
+ "tokio",
+ "tokio-pg-mapper",
+ "tokio-pg-mapper-derive",
+ "tokio-postgres",
 ]
 
 [[package]]

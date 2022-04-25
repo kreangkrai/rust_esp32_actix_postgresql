@@ -11,6 +11,15 @@ pub async fn get_datas(req: HttpRequest) -> Result<HttpResponse,MyError>{
     }
     Ok(HttpResponse::BadRequest().into())
 }
+pub async fn get_data(req: HttpRequest,device :web::Path<String>) -> Result<HttpResponse,MyError>{
+    if let Some(hdr) = req.headers().get(http::header::CONTENT_TYPE) {
+        if let Ok(_s) = hdr.to_str() {
+            let data = data::getbydevice(device.into_inner()).await?;   
+            return Ok(HttpResponse::Ok().json(data));
+        }
+    }
+    Ok(HttpResponse::BadRequest().into())
+}
 pub async fn add_data(req: HttpRequest,_data:web::Json<Data>) -> Result<HttpResponse,MyError>{
     if let Some(hdr) = req.headers().get(http::header::CONTENT_TYPE) {
         if let Ok(_s) = hdr.to_str() {

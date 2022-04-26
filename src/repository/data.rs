@@ -2,7 +2,7 @@ use tokio;
 use crate::databases::db::DB;
 use tokio_postgres::{NoTls};
 use crate::models::{Data};
-use chrono::{DateTime,Utc};
+use chrono::{DateTime,Utc,Local};
 
 pub async fn gets()->Result<Vec<Data>,tokio_postgres::Error>{
     let (client, connection) =
@@ -17,7 +17,7 @@ pub async fn gets()->Result<Vec<Data>,tokio_postgres::Error>{
     let mut id:i32;
     let mut device:String;
     let mut value:f32;
-    let mut date:DateTime<Utc>;
+    let mut date:DateTime<Local>;
     let rows = client.query("select * from datas order by id", &[]).await?;
     for row in rows{
         id = row.get(0);
@@ -25,7 +25,7 @@ pub async fn gets()->Result<Vec<Data>,tokio_postgres::Error>{
         value = row.get(2);
         date = row.get(3);
                         
-        datas.push(Data{id:id,device:device,value:value,date:date.to_string()});
+        datas.push(Data{id:id,device:device,value:value,date:date.format("%Y-%m-%d %H:%M:%S").to_string()});
     } 
     Ok(datas)      
 }
@@ -42,7 +42,7 @@ pub async fn getbydevice(_device:String)->Result<Vec<Data>,tokio_postgres::Error
     let mut id:i32;
     let mut device:String;
     let mut value:f32;
-    let mut date:DateTime<Utc>;
+    let mut date:DateTime<Local>;
     let rows = client.query("select * from datas where device = $1", &[&_device]).await?;
     for row in rows{
         id = row.get(0);
@@ -50,7 +50,7 @@ pub async fn getbydevice(_device:String)->Result<Vec<Data>,tokio_postgres::Error
         value = row.get(2);
         date = row.get(3);
                         
-        datas.push(Data{id:id,device:device,value:value,date:date.to_string()});
+        datas.push(Data{id:id,device:device,value:value,date:date.format("%Y-%m-%d %H:%M:%S").to_string()});
     } 
     Ok(datas)      
 }

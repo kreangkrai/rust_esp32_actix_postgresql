@@ -11,7 +11,7 @@ async fn main() -> std::io::Result<()>{
         .configure(config_app)
         .wrap(middleware::Logger::default())
     })
-    .bind(("127.0.0.1",8081))?
+    .bind(("172.20.10.8",8082))?
     .run()
     .await
 }
